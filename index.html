@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    
+    <!-- Blending mode
+<style>
+.container {
+  background-color: red;
+  padding: 15px;
+}
+
+.container img {
+  mix-blend-mode: lighten;
+}
+</style>
+-->
+    <title>Hello world!</title>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <!-- verlinkt Framework Aframe -->
+  </head>
+  <body>
+    <a-scene>
+      <!-- baut Szene -->
+      
+      
+      
+      <a-entity position="0 0 -5">
+        <a-box color="darkblue" width="0.5" height="0.5" depth="0.5" position="0 2 -3" rotation="45 45 0" scale="2 2 2"> </a-box>
+        <a-sphere position="0 3 -3" radius="1" color="#EF2D5E" scale="1 0.5 1"></a-sphere>
+        <a-cylinder opacity="0.6" position="0 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
+      </a-entity>
+      
+      <div class="container">
+        <a-plane position="0 0 -8" rotation="-90 0 0" width="4" height="4" color="#7BC8A4" src="https://cdn.glitch.global/cc2d4226-dee5-41ac-92a8-77d7c30bb1cb/thumbnails%2Ftest.jpg?1680691507400" ></a-plane>
+      </div>
+       <a-plane position="0 0 -8" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+        <a-sky color="orange" src="https://cdn.glitch.global/cc2d4226-dee5-41ac-92a8-77d7c30bb1cb/thumbnails%2Ftest.jpg?1680691507400"></a-sky>
+      
+      
+      <!-- unter allen Geometrien liegt eigentlich eine a-entity:
+      <a-entity geometry="primitive: box" material= "color: orange"></a-entity> -->
+      
+      <!-- manipulationen Zylinder
+      <a-cylinder color="orange" position="0 0 -3" segments-radial="100" theta-start="0" thehta-length="180" side="double" open-ended="false" material="side: double"  ></a-cylinder>
+      -->
+      
+    </a-scene>
+  </body>
+</html>
+
+<!-- Aframe richtet automatisch eine Camera und Umgebung ein! 
+Einheit von Aframe ist Meter
+Durch Szene kann mit Pfeiltasten/Asdw navigiert werden
+
+x links rechts, y oben unten, z hinten vorne
+Zentrum von Objekten ist in der Mitte
+
+Preview > preview in new window > Strg+Alt+i: Inspector -->
