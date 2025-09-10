@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>Hello world!</title>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+     <script src="https://unpkg.com/aframe-animation-component@^5.1.2/dist/aframe-animation-component.min.js"></script> 
+    <!-- verlinkt Framework Aframe -->
+  </head>
+  <body>
+    <a-assets> 
+      <img id="skytex" crossorigin = "anonymous" src = "https://cdn.glitch.global/cc2d4226-dee5-41ac-92a8-77d7c30bb1cb/thumbnails%2Ftest.jpg?1680691507400"> </a-assets>
+    <a-scene>
+      <!-- baut Szene -->
+      <a-entity cursor="rayOrigin: mouse"></a-entity>
+      
+      <a-entity position="-1 0 -5">
+        <a-box color=#0000ff width="0.5" height="0.5" depth="0.5" position="0 2 -3" scale="2 2 2"
+            animation="property: color; to: #00ff54; dur: 10000; loop:true; dir:alternate"; easing:"easeInSine" >  </a-box>
+         <a-box color="darkred" width="0.5" height="0.5" depth="0.5" position="2 2 -3" scale="2 2 2"
+                 animation="property: position; to: 2 4 -3; dur: 1000; loop:true; dir:alternate"; easing:"easeInSine;"
+                 animation__scale="property: scale; to: 0.5 0.5 0.5; dur: 1000; loop:true; dir:alternate"; easing:"easeInSine" 
+                 animation__color="property: color; from: #ff0033; to: #00ff54; dur: 1000; loop:true; dir:alternate"; easing:"easeInSine">
+        </a-box>
+        <a-box color="darkgreen" width="0.5" height="0.5" depth="0.5" position="-2 2 -3" scale="2 2 2"
+               animation="property: color; to: #00ff54; dur: 1000; "; easing:"easeInSine"; startEvents:"click"
+               animation__enter="property: color; from: #00ff54; to:#11ff99; dur: 10; easing:easeInSine; startEvents:mouseenter"
+               > </a-box>
+        <a-box color="orange" width="0.5" height="0.5" depth="0.5" position="4 2 -3" scale="2 2 2" 
+               animation="property: color; from: #0000ff; to: #00ff54; dur: 1000; loop:true; dir:alternate; easing:easeInSine; startEvents:click" > </a-box>
+        
+      </a-entity>
+      
+    </a-scene>
+  </body>
+</html>
+
+<!-- Aframe richtet automatisch eine Camera und Umgebung ein! 
+Einheit von Aframe ist Meter
+Durch Szene kann mit Pfeiltasten/Asdw navigiert werden
+
+x links rechts, y oben unten, z hinten vorne
+Zentrum von Objekten ist in der Mitte
+
+Preview > preview in new window > Strg+Alt+i: Inspector -->
