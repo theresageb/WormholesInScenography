@@ -28,10 +28,14 @@
       shadow="type: pcfsoft"
       xr-mode-ui="XRMode: xr"
     >
+      <a-assets>
+        <img id="treemap" src="assets/treemap.png" crossorigin="anonymous" />
+      </a-assets>
+      
       <a-light type="directional" light="castShadow:false;" position="1 1 1" intensity="1.57" shadow-camera-automatic="#objects"></a-light>
       <a-camera position="0 0.4 0" wasd-controls="acceleration:10;"></a-camera>
       <a-entity id="objects" scale="0.2 0.2 0.2" position="0 0 -1" shadow>
-        <a-plane position="0 0 0" rotation="-90 0 0" width="10" height="10" color="#7BC8A4"></a-plane>
+        <a-plane position="0 0 0" rotation="-90 0 0" width="10" height="10" color="#7BC8A4" src="#treemap"></a-plane>
       </a-entity>
       <!-- <a-plane follow-shadow="#objects" material="shader:shadow" shadow="cast:false;" rotation="-90 0 0" width="2" height="2"></a-plane> -->
       <a-sky color="#ECECEC" hide-on-enter-ar></a-sky>
