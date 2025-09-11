@@ -1,32 +1,99 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Markerless AR</title>
-    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
-  </head>
-  <body style="margin:0; overflow:hidden;">
-    <a-scene
-      embedded
-      renderer="colorManagement: true"
-      xr-mode-ui="enabled: true"
-      webxr="optionalFeatures: hit-test;"
-    >
-      <a-assets>
-        <img id="treemap" src="assets/treemap.png" crossorigin="anonymous" />
-      </a-assets>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <title>AR Hello World (markerlos)</title>
+  <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+</head>
+<body style="margin: 0; overflow: hidden;">
+  <a-scene
+    vr-mode-ui="enabled: false"
+    renderer="antialias: true; colorManagement: true;"
+    webxr="requiredFeatures: hit-test; optionalFeatures: local-floor"
+    device-orientation-permission-ui="enabled: true"
+  >
+    <!-- Reticle / Platzierungsanzeiger -->
+    <a-entity id="reticle" visible="false">
+      <a-ring 
+        rotation="-90 0 0" 
+        radius-inner="0.05" 
+        radius-outer="0.06" 
+        color="yellow"
+        material="opacity: 0.8"
+      ></a-ring>
+    </a-entity>
 
-      <!-- Objekt: deine Karte -->
-      <a-plane
-        src="#treemap"
-        material="transparent: true"
-        rotation="-90 0 0"
-        width="2"
-        height="2"
-        position="0 0 -1"
+    <!-- Karte, die beim Tippen erscheint -->
+    <a-entity id="map" visible="false">
+      <a-plane 
+        rotation="-90 0 0" 
+        width="3" 
+        height="3" 
+        color="green"
       ></a-plane>
+      <a-box position="0 0.25 0" color="red"></a-box>
+    </a-entity>
 
-      <a-camera></a-camera>
-    </a-scene>
-  </body>
+    <a-camera></a-camera>
+  </a-scene>
+
+  <script>
+    const sceneEl = document.querySelector('a-scene');
+    const reticle = document.getElementById('reticle');
+    const map = document.getElementById('map');
+
+    let hitTestSource = null;
+    let localSpace = null;
+
+    sceneEl.addEventListener('enter-vr', async () => {
+      const session = sceneEl.xrSession;
+      if (!session) return;
+
+      // Request Hit-Test Source
+      const viewerSpace = await session.requestReferenceSpace('viewer');
+      hitTestSource = await session.requestHitTestSource({ space: viewerSpace });
+      localSpace = await session.requestReferenceSpace('local-floor');
+
+      session.addEventListener('select', () => {
+        if (reticle.visible && !map.getAttribute('visible')) {
+          // Karte dort platzieren, wo der Reticle ist
+          const pos = reticle.getAttribute('position');
+          map.setAttribute('position', `${pos.x} ${pos.y} ${pos.z}`);
+          map.setAttribute('visible', true);
+        }
+      });
+    });
+
+    sceneEl.addEventListener('update-vr-status', () => {
+      // optionally reacting auf statuswechsel
+    });
+
+    sceneEl.renderer.xr.addEventListener('sessionend', () => {
+      hitTestSource = null;
+      localSpace = null;
+      reticle.setAttribute('visible', false);
+      map.setAttribute('visible', false);
+    });
+
+    sceneEl.addEventListener('frame', (evt) => {
+      const xrFrame = evt.detail.frame;  // A-Frame übergibt frame in evt.detail
+      if (!hitTestSource || !localSpace) return;
+
+      const viewerPose = xrFrame.getViewerPose(localSpace);
+      if (!viewerPose) return;
+
+      const hitTestResults = xrFrame.getHitTestResults(hitTestSource);
+      if (hitTestResults.length > 0) {
+        const hit = hitTestResults[0];
+        const pose = hit.getPose(localSpace);
+
+        reticle.setAttribute('position', `${pose.transform.position.x} ${pose.transform.position.y} ${pose.transform.position.z}`);
+        reticle.setAttribute('visible', true);
+      } else {
+        reticle.setAttribute('visible', false);
+      }
+    });
+
+  </script>
+</body>
 </html>
