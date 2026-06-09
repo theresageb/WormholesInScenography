@@ -29,14 +29,14 @@
       xr-mode-ui="XRMode: xr"
     >
       <a-assets timeout="20000">
-        <img id="treemap" src="treemap.png" crossorigin="anonymous" />
-        <a-asset-item id="root" src="https://theresageb.github.io/WormholesInScenography/Roots.glb" crossorigin="anonymous"></a-asset-item>
+        <!-- <img id="treemap" src="treemap.png" crossorigin="anonymous" /> -->
+        <a-asset-item id="root" src="https://theresageb.github.io/NaturUndSzenografie/Roots.glb" crossorigin="anonymous"></a-asset-item>
       </a-assets>
       
      <!-- <a-light type="directional" light="castShadow:false;" position="1 1 1" intensity="1.57" shadow-camera-automatic="#objects"></a-light> -->
       <a-camera position="0 1.6 0" wasd-controls="acceleration:10;" rotation="0 0 0"></a-camera>
       <a-entity id="objects" scale="1 1 1" position="0 0 0" shadow>
-       <a-plane position="0 0 0" rotation="-90 0 0" width="16" height="16" color="#7BC8A4" src="#treemap" material="transparent: true"></a-plane> 
+       <!-- <a-plane position="0 0 0" rotation="-90 0 0" width="16" height="16" color="#7BC8A4" src="#treemap" material="transparent: true"></a-plane> -->
         <a-entity gltf-model="#root" position="0 0 -2" scale="0.003 0.003 0.003" color="black"></a-entity>
         
       </a-entity>
