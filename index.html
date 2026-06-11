@@ -5,6 +5,7 @@
     <title>Unter Bäumen | VR-Wurzelsystem</title>
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aframe-ar-hit-test-component@0.6.3/dist/aframe-ar-hit-test-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
     <meta name="description" content="Unter Bäumen | VR-Wurzelsystem">
 
     <script>
@@ -31,6 +32,8 @@
         <!-- <img id="treemap" src="treemap.png" crossorigin="anonymous" /> -->
         <a-asset-item id="root" src="https://theresageb.github.io/NaturUndSzenografie/Roots2.glb" crossorigin="anonymous"></a-asset-item>
       </a-assets>
+
+      <a-entity environment="preset: forest" hide-on-enter-ar></a-entity>
       
      <!-- <a-light type="directional" light="castShadow:false;" position="1 1 1" intensity="1.57" shadow-camera-automatic="#objects"></a-light> -->
       <a-camera position="0 1.6 0" wasd-controls="acceleration:10;" rotation="0 0 0"></a-camera>
